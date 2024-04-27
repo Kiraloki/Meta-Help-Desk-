@@ -159,6 +159,8 @@ app.get("/messaging-webhook", (req, res) => {
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT;
+const port = process.env.PORT || 3000;
 
-app.listen(PORT);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
