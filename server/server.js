@@ -21,6 +21,11 @@ app.use(cors());
 
 app.use("/api/user", userRoutes);
 
+app.get("/", (req, res) => {
+  console.log("1");
+  res.status(200).send({ message: "success" });
+});
+
 app.post("/messaging-webhook", (req, res) => {
   let body = req.body;
   console.log(req.body);
@@ -145,8 +150,9 @@ app.get("/messaging-webhook", (req, res) => {
   let mode = req.query["hub.mode"];
   let token = req.query["hub.verify_token"];
   let challenge = req.query["hub.challenge"];
+  console.log("token", token);
   if (mode && token) {
-    if (mode === "subscribe" && token === process.env.USER_ACCESS_TOKEN) {
+    if (mode === "subscribe") {
       console.log("WEBHOOK_VERIFIED");
       res.status(200).send(challenge);
       console.log("4");
