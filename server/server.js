@@ -152,7 +152,8 @@ app.get("/messaging-webhook", (req, res) => {
   let challenge = req.query["hub.challenge"];
   console.log("token", token);
   if (mode && token) {
-    if (mode === "subscribe") {
+    if (mode === "subscribe" && token === process.env.USER_ACCESS_TOKEN)
+     {
       console.log("WEBHOOK_VERIFIED");
       res.status(200).send(challenge);
       console.log("4");
